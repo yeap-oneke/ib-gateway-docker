@@ -10,7 +10,7 @@ FROM ubuntu:24.04 AS setup
 
 ENV IB_GATEWAY_VERSION=10.45.1h
 ENV IB_GATEWAY_CHANNEL=stable
-ENV IBC_VERSION=3.24.0
+ENV IBC_VERSION=3.24.1
 ARG DEBIAN_FRONTEND=noninteractive
 ARG IB_GATEWAY_REPO="https://github.com/yeap-oneke/ib-gateway-docker"
 ARG IBC_FILE="IBCLinux-${IBC_VERSION}.zip"
@@ -40,6 +40,7 @@ RUN apt-get update -y && \
   sha256sum --check "./${IB_GATEWAY_FILE}.sha256" &&\
   chmod a+x "./${IB_GATEWAY_FILE}" && \
   "./${IB_GATEWAY_FILE}" -q -dir "/root/Jts/ibgateway/${IB_GATEWAY_VERSION}" && \
+  echo "/home/ibgateway/Jts/ibgateway/${IB_GATEWAY_VERSION}/jre" > "/root/Jts/ibgateway/${IB_GATEWAY_VERSION}/.install4j/inst_jre.cfg" && \
   # Install IBC
   curl -sSOL "${IBC_URL}" && \
   mkdir /root/ibc && \
@@ -74,9 +75,9 @@ ENV IBC_INI=${HOME}/ibc/config.ini
 ENV IBC_INI_TMPL=${IBC_INI}.tmpl
 ENV SCRIPT_PATH=${HOME}/scripts
 ENV GATEWAY_OR_TWS=gateway
+ENV JAVA_HOME=${TWS_PATH}/ibgateway/${IB_GATEWAY_VERSION}/jre
 ARG DEBIAN_FRONTEND=noninteractive
 # Copy files
-COPY --from=setup /usr/local/ /usr/local/
 COPY --chown=${USER_ID}:${USER_GID} --from=setup /root/ ${HOME}
 
 # Prepare system
