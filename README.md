@@ -62,8 +62,8 @@ services:
     build:
       context: ./stable
       tags:
-        - "ghcr.io/gnzsnz/ib-gateway:stable"
-    image: ghcr.io/gnzsnz/ib-gateway:stable
+        - "ghcr.io/yeap-oneke/ib-gateway:stable"
+    image: ghcr.io/yeap-oneke/ib-gateway:stable
     environment:
       TWS_USERID: ${TWS_USERID}
       TWS_PASSWORD: ${TWS_PASSWORD}

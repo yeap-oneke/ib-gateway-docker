@@ -38,8 +38,7 @@ jobs:
         uses: docker/metadata-action@v6
         with:
           images: |
-            ghcr.io/gnzsnz/ib-gateway
-            gnzsnz/ib-gateway
+            ghcr.io/yeap-oneke/ib-gateway
           flavor: |
             latest=false
           tags: |
@@ -67,8 +66,7 @@ jobs:
         uses: docker/metadata-action@v6
         with:
           images: |
-            ghcr.io/gnzsnz/tws-rdesktop
-            gnzsnz/tws-rdesktop
+            ghcr.io/yeap-oneke/tws-rdesktop
           flavor: |
             latest=false
           tags: |
